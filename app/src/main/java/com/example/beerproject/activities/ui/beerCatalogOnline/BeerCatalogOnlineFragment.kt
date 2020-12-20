@@ -108,7 +108,7 @@ class BeerCatalogOnlineFragment : Fragment() {
 //            params.put("x-rapidapi-key", "03f3fe5662msh1e87153aa5db028p1a84d8jsn7d5919c12887")
 //            params.put("x-rapidapi-host", "brianiswu-open-brewery-db-v1.p.rapidapi.com")
 
-            var request = JsonObjectRequest(url, null, Response.Listener {
+            var request = JsonObjectRequest(url, null, {
 
 
                 GlobalScope.launch {
@@ -179,7 +179,7 @@ class BeerCatalogOnlineFragment : Fragment() {
                     finished = true;
                 }
 
-            }, Response.ErrorListener {
+            }, {
 
                 Log.println(Log.ERROR, "SOME TAG", "Beer load error!!!  " + it.message);
 

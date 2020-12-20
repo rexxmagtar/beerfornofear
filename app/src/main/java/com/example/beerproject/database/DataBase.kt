@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
 
-class DataBase(context: Context) : SQLiteOpenHelper(context, "beer_catalog.db", null, 4) {
+class DataBase(context: Context?) : SQLiteOpenHelper(context, "beer_catalog.db", null, 4) {
 
     private val TABLE_EVENT = "Event"
     private val TABLE_BEER = "Beer"
