@@ -6,23 +6,23 @@ import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
-import android.os.StrictMode
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.ListView
-import androidx.annotation.MainThread
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.beerproject.R
 import com.example.beerproject.activities.ui.beerCatalogOnline.beerInfoList.BeerInfoAdapter
+import com.example.beerproject.database.DataBase
 import kotlinx.coroutines.*
+import java.io.ByteArrayOutputStream
 import java.io.InputStream
 import java.net.HttpURLConnection
 import java.net.URL
@@ -50,7 +50,7 @@ class BeerCatalogOnlineFragment : Fragment() {
 
         val root = inflater.inflate(R.layout.fragment_beer_catalog_online, container, false)
 
-        var infoes = emptyArray<BeerInfoAdapter.BeerInfo>()
+        var infoes = ArrayList<BeerInfoAdapter.BeerInfo>()
 
         var adapter = BeerInfoAdapter(infoes, requireContext());
 
@@ -59,9 +59,27 @@ class BeerCatalogOnlineFragment : Fragment() {
         listView.adapter = adapter;
 
         getBeerInfo(10000) {
-            requireActivity().runOnUiThread {
-                adapter.infoes = it;
-                adapter.notifyDataSetChanged();
+
+            try {
+                if (!isAdded) {
+                    return@getBeerInfo
+                }
+                requireActivity().runOnUiThread {
+
+                    if (!isAdded) {
+                        return@runOnUiThread
+                    }
+
+                    try {
+                        adapter.infoes = it;
+                        adapter.notifyDataSetChanged();
+                    } catch (ex: java.lang.Exception) {
+                        System.out.println("Exception " + ex.message)
+                    }
+
+                }
+            } catch (ex: java.lang.Exception) {
+                System.out.println("Exception " + ex.message)
             }
         };
 
@@ -88,9 +106,11 @@ class BeerCatalogOnlineFragment : Fragment() {
         return root
     }
 
+    var scope: Job? = null;
+
     public fun getBeerInfo(
         limitCount: Int,
-        listener: (result: Array<BeerInfoAdapter.BeerInfo>?) -> Unit
+        listener: (result: ArrayList<BeerInfoAdapter.BeerInfo>?) -> Unit
     ) {
 
         var result = ArrayList<BeerInfoAdapter.BeerInfo>();
@@ -111,7 +131,7 @@ class BeerCatalogOnlineFragment : Fragment() {
             var request = JsonObjectRequest(url, null, {
 
 
-                GlobalScope.launch {
+                scope = GlobalScope.launch {
                     System.out.println("Loaded beer.")
 
                     var beerList = it.getJSONArray("data");
@@ -159,7 +179,15 @@ class BeerCatalogOnlineFragment : Fragment() {
                         if (photoUrl.isNotEmpty()) {
                             var map = getBitmapFromURL(photoUrl)
 
-                            photo = BitmapDrawable(resources, map);
+                            if (isAdded) {
+                                try {
+                                    photo = BitmapDrawable(resources, map);
+                                } catch (ex: Exception) {
+                                    System.out.println("Exception: " + ex.message)
+                                }
+                            } else {
+                                return@launch
+                            }
                         } else {
                             photo = resources.getDrawable(R.drawable.vodka);
                         }
@@ -172,7 +200,7 @@ class BeerCatalogOnlineFragment : Fragment() {
 
                         result!!.add(beerInfo)
 
-                        listener.invoke(result.toArray(emptyArray<BeerInfoAdapter.BeerInfo>()));
+                        listener.invoke(result);
 
                     }
 
@@ -197,7 +225,7 @@ class BeerCatalogOnlineFragment : Fragment() {
                 /* println("Waiting")*/
             }
 
-            listener.invoke(result.toArray(emptyArray<BeerInfoAdapter.BeerInfo>()));
+            listener.invoke(result);
 
         }
 
@@ -221,9 +249,64 @@ class BeerCatalogOnlineFragment : Fragment() {
 
     }
 
+    override fun onDetach() {
+        super.onDetach()
+        try {
+            System.out.println("trying to cancel job")
+            scope?.cancel("fragment was destroyed")
+            System.out.println("canceled job")
+        } catch (ex: java.lang.Exception) {
+            System.out.println(ex.message)
+        }
+    }
+
     public fun saveBeerInfo(info: BeerInfoAdapter.BeerInfo) {
 
-        TODO("SAVE BEER INFO IN DATABASE")
+        var database = DataBase(context)
+
+        var querryStr =
+            "INSERT INTO " + database.TABLE_BEER + "(name,photo,description) VALUES(?, ?, ?) "
+
+        var querry = database.writableDatabase.compileStatement(querryStr);
+
+        if (database.readableDatabase
+                .rawQuery(
+                    "SELECT * FROM BEER " +
+                            "WHERE name = " + "'" + info.title + "'" + " AND description = " + "'" + info.description + "'",
+                    null
+                ).moveToNext()
+        ) {
+            Toast.makeText(context, "Beer info already added to favorites", Toast.LENGTH_SHORT)
+                .show()
+
+            return
+        }
+
+        querry.bindString(1, info.title);
+        querry.bindBlob(2, getDrawableBytes(info.photo!!))
+        querry.bindString(3, info.description);
+
+        if (querry.executeInsert() < 0) {
+            System.out.println("Failed to insert")
+
+            Toast.makeText(context, "Failed to add beer info", Toast.LENGTH_SHORT).show()
+
+        } else {
+            System.out.println("Inserted succesfully")
+
+            Toast.makeText(context, "Beer info added to favorites", Toast.LENGTH_SHORT).show()
+        }
+
+    }
+
+    public fun getDrawableBytes(d: Drawable): ByteArray {
+
+        val bitmap = (d as BitmapDrawable).bitmap
+        val stream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+        val bitmapdata: ByteArray = stream.toByteArray()
+
+        return bitmapdata
     }
 
 }

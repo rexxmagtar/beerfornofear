@@ -9,21 +9,14 @@ import android.database.sqlite.SQLiteOpenHelper
 
 class DataBase(context: Context?) : SQLiteOpenHelper(context, "beer_catalog.db", null, 4) {
 
-    private val TABLE_EVENT = "Event"
-    private val TABLE_BEER = "Beer"
+    public val TABLE_EVENT = "Event"
+    public val TABLE_BEER = "Beer"
 
     val createDBRequest = "CREATE TABLE $TABLE_EVENT (" +
             "ID integer PRIMARY KEY AUTOINCREMENT," +
             "name_event varchar," +
             "description text," +
             "date datetime" +
-            ");" +
-            "" +
-            "CREATE TABLE $TABLE_BEER (" +
-            "ID integer PRIMARY KEY AUTOINCREMENT," +
-            "name varchar PRIMARY KEY AUTOINCREMENT," +
-            "photo blob PRIMARY KEY AUTOINCREMENT," +
-            "description text PRIMARY KEY AUTOINCREMENT" +
             ");"
 
     fun insertIntoEventTable(name_event: String, description_event: String, date_event: String) {
@@ -59,6 +52,11 @@ class DataBase(context: Context?) : SQLiteOpenHelper(context, "beer_catalog.db",
 
     override fun onCreate(db: SQLiteDatabase?) {
         db?.execSQL(createDBRequest)
+        db?.execSQL( "CREATE TABLE $TABLE_BEER (" +
+                "ID integer PRIMARY KEY AUTOINCREMENT," +
+                "name varchar ," +
+                "photo blob ," +
+                "description text )")
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {

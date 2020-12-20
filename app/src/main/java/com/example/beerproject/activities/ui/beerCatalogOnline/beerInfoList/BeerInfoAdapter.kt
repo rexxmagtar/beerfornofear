@@ -9,7 +9,6 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.core.content.ContextCompat.getSystemService
 import com.example.beerproject.R
 
 class BeerInfoAdapter : BaseAdapter {
@@ -27,11 +26,11 @@ class BeerInfoAdapter : BaseAdapter {
         }
     }
 
-    public var infoes: Array<BeerInfo>? = null;
+    public var infoes: ArrayList<BeerInfo>? = null;
     private var context: Context? = null;
     private var inflanter: LayoutInflater? = null;
 
-    constructor(infoes: Array<BeerInfo>?, context: Context) : super() {
+    constructor(infoes: ArrayList<BeerInfo>?, context: Context) : super() {
         this.infoes = infoes
         this.context = context;
         this.inflanter =

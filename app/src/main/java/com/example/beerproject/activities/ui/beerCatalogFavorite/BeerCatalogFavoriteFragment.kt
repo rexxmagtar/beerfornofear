@@ -1,15 +1,22 @@
 package com.example.beerproject.activities.ui.beerCatalogFavorite
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.ListView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.beerproject.R
 import com.example.beerproject.activities.ui.beerCatalogOnline.beerInfoList.BeerInfoAdapter
+import com.example.beerproject.database.DataBase
+import java.io.ByteArrayOutputStream
+import java.util.ArrayList
 
 class BeerCatalogFavoriteFragment : Fragment() {
 
@@ -49,23 +56,81 @@ class BeerCatalogFavoriteFragment : Fragment() {
         listView.setOnItemLongClickListener { parent, view, position, id ->
             removeBeerInfo(adapter.infoes!![position])
 
+            infoes.removeAt(position)
+
+            adapter.notifyDataSetChanged()
+
             true
         }
 
         return root
     }
 
-    public fun loadBeerInfo(): Array<BeerInfoAdapter.BeerInfo> {
+    public fun loadBeerInfo(): ArrayList<BeerInfoAdapter.BeerInfo> {
 
-        var result = arrayOf<BeerInfoAdapter.BeerInfo>(BeerInfoAdapter.BeerInfo("pivo1",resources.getDrawable(R.drawable.vodka),"pivo1 description"));
+        var result = ArrayList<BeerInfoAdapter.BeerInfo>()
 
-        //TODO: code to load here
+        var database = DataBase(context)
+
+        var cursor =
+            database.readableDatabase.rawQuery("SELECT * FROM " + database.TABLE_BEER, null)
+
+        if (cursor.moveToFirst()) {
+
+            do {
+
+                var name = cursor.getString(cursor.getColumnIndex("name"))
+
+                var description = cursor.getString(cursor.getColumnIndex("description"))
+
+                var photoBytes = cursor.getBlob(cursor.getColumnIndex("photo"))
+
+                var photo = BitmapDrawable(
+                    getResources(),
+                    BitmapFactory.decodeByteArray(photoBytes, 0, photoBytes.size)
+                )
+
+                result.add(BeerInfoAdapter.BeerInfo(name, photo, description))
+
+
+            } while (cursor.moveToNext())
+        }
 
         return result;
 
     }
 
-    public fun removeBeerInfo(info:BeerInfoAdapter.BeerInfo){
+    public fun removeBeerInfo(info: BeerInfoAdapter.BeerInfo) {
 
+        var database = DataBase(context)
+
+        var querryStr =
+            "DELETE FROM " + database.TABLE_BEER + " WHERE name = ? AND description = ? "
+
+        var querry = database.writableDatabase.compileStatement(querryStr);
+
+        querry.bindString(1, info.title);
+        querry.bindString(2, info.description);
+
+        if (querry.executeInsert() < 0) {
+            System.out.println("Failed to delete")
+
+            Toast.makeText(context, "Failed to remove beer info", Toast.LENGTH_SHORT).show()
+        } else {
+            System.out.println("Deleted succesfully")
+
+            Toast.makeText(context, "Removed beer info", Toast.LENGTH_SHORT).show()
+        }
+
+    }
+
+    public fun getDrawableBytes(d: Drawable): ByteArray {
+
+        val bitmap = (d as BitmapDrawable).bitmap
+        val stream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+        val bitmapdata: ByteArray = stream.toByteArray()
+
+        return bitmapdata
     }
 }
