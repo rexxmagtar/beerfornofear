@@ -18,6 +18,7 @@ class BeerInfoAdapter : BaseAdapter {
         public var title: String = "dummy title";
         public var photo: Drawable? = null;
         public var description: String = "dummy description";
+        public var isExpanded = false;
 
         constructor(title: String, photo: Drawable?, description: String) {
             this.title = title
@@ -33,7 +34,8 @@ class BeerInfoAdapter : BaseAdapter {
     constructor(infoes: Array<BeerInfo>?, context: Context) : super() {
         this.infoes = infoes
         this.context = context;
-        this.inflanter = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater?;
+        this.inflanter =
+            context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater?;
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
@@ -54,8 +56,11 @@ class BeerInfoAdapter : BaseAdapter {
         description.text = item.description;
         beerPhoto.setImageDrawable(item.photo);
 
-        vi!!.findViewById<LinearLayout>(R.id.AdditionalBeerInfo).visibility = View.GONE;
-
+        if (!item.isExpanded) {
+            vi!!.findViewById<LinearLayout>(R.id.AdditionalBeerInfo).visibility = View.GONE;
+        } else {
+            vi!!.findViewById<LinearLayout>(R.id.AdditionalBeerInfo).visibility = View.VISIBLE;
+        }
         return vi;
 
     }

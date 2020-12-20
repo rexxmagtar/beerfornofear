@@ -15,7 +15,8 @@
         android:text="TextView"
         android:textSize="30dp"
         android:textColor="@color/black"
-        android:paddingBottom="15dp"/>
+        android:paddingBottom="15dp"
+        android:paddingLeft="5dp"/>
 
     <LinearLayout
         android:id="@+id/AdditionalBeerInfo"
@@ -38,7 +39,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView"
-            android:textSize="30dp"/>
+            android:textSize="24dp"
+            android:paddingLeft="5dp"
+            android:textColor="@color/black"/>
     </LinearLayout>
 
 </LinearLayout>
