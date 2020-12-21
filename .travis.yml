@@ -45,9 +45,8 @@ before_script:
 
 script:
   - ./gradlew clean
-  - ./gradlew compileApp
-  - ./gradlew runUnitTests
-  - ./gradlew runTestCoverage
+  - ./gradlew test
+  - ./gradlew connectedAndroidTest
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
