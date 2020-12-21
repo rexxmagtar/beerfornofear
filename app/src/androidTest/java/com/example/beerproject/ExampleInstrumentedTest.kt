@@ -16,16 +16,22 @@ import org.junit.Assert.*
  */
 @RunWith(AndroidJUnit4::class)
 class ExampleInstrumentedTest {
+
+
     @Test
     fun testDBUpdateRow() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
         // assertEquals("com.example.beerproject", appContext.packageName)
-
         val dbHelper = DataBase(appContext)
 
-        assertEquals(1, dbHelper.updateDataInEventTable("1", "Drink Every Day",
+        val idVodka = dbHelper.insertIntoEventTable("drink_vodka",
+            "Svayak is coming", "31.12.2020 23:55")
+
+        assertEquals(1, dbHelper.updateDataInEventTable(idVodka.toString(), "Drink Every Day",
         "GO DRINK!", "25.12.2020 12:35"))
+
+        dbHelper.deleteRowFromEventTable(idVodka.toString())
     }
 
     @Test
@@ -34,7 +40,10 @@ class ExampleInstrumentedTest {
 
         val dbHelper = DataBase(appContext)
 
-        assertEquals(1, dbHelper.deleteRowFromEventTable("1"))
+        val idVodka = dbHelper.insertIntoEventTable("drink_vodka",
+            "Svayak is coming", "31.12.2020 23:55")
+
+        assertEquals(1, dbHelper.deleteRowFromEventTable(idVodka.toString()))
     }
 
 
