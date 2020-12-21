@@ -1,5 +1,6 @@
 package com.example.beerproject
 
+import com.example.beerproject.database.DataBase
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -11,7 +12,7 @@ import org.junit.Assert.*
  */
 class ExampleUnitTest {
     @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 3 + 2)
+    fun testDBUpdate() {
+        assertEquals(1, 3 + 2)
     }
 }

@@ -61,17 +61,17 @@ class DataBase(context: Context?) : SQLiteOpenHelper(context, "beer_catalog.db",
     fun updateDataInEventTable(
         id_event: String, name_event: String,
         description_event: String, date_event: String
-    ) {
+    ): Int {
         val values = ContentValues()
 
         values.put("name_event", name_event)
         values.put("description", description_event)
         values.put("date", date_event)
-        writableDatabase.update(TABLE_EVENT, values, "ID=$id_event", null)
+        return writableDatabase.update(TABLE_EVENT, values, "ID=$id_event", null).toInt()
     }
 
-    fun deleteRowFromEventTable(id_event: String) {
-        writableDatabase.delete(TABLE_EVENT, "ID=$id_event", null)
+    fun deleteRowFromEventTable(id_event: String): Int {
+        return writableDatabase.delete(TABLE_EVENT, "ID=$id_event", null).toInt()
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
