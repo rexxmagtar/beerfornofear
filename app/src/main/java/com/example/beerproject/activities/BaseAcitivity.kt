@@ -23,6 +23,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 
+const val EXTRA_NAV_FRAGMENT_ID_KEY = "nav_fragment"
+
 
 class BaseAcitivity : AppCompatActivity() {
 
@@ -74,7 +76,13 @@ class BaseAcitivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+        if (intent.extras!=null && intent.extras!!.containsKey(EXTRA_NAV_FRAGMENT_ID_KEY)) {
+            navController.navigate(intent!!.extras!!.getInt(EXTRA_NAV_FRAGMENT_ID_KEY))
+        }
 
+//        navController.navigate(R.id.nav_events)
+
+//        navController.graph.startDestination=R.id.nav_events;
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

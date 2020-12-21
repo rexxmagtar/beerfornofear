@@ -14,6 +14,7 @@ import androidx.core.app.NotificationCompat.PRIORITY_MIN
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.beerproject.MainActivity
+import com.example.beerproject.activities.BaseAcitivity
 import com.example.beerproject.activities.events.Event
 import com.example.beerproject.database.DataBase
 import kotlinx.coroutines.*
@@ -27,7 +28,7 @@ import java.util.concurrent.TimeUnit
 class MyService : Service() {
     var nm: NotificationManager? = null
 
-    private var notificationPeriodSeconds = 10;
+    private var notificationPeriodSeconds = 60*60*1;
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate() {
@@ -60,7 +61,7 @@ class MyService : Service() {
     fun sendNotif(title: String, description: String) {
 
         // 3-я часть
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, BaseAcitivity::class.java)
         val pIntent = PendingIntent.getActivity(this, 0, intent, 0)
 
         val notif = Notification.Builder(this, "all_notifications")

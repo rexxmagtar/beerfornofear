@@ -8,6 +8,8 @@ import android.text.format.DateFormat
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.beerproject.R
+import com.example.beerproject.activities.BaseAcitivity
+import com.example.beerproject.activities.EXTRA_NAV_FRAGMENT_ID_KEY
 import com.example.beerproject.database.DataBase
 import java.util.*
 
@@ -90,12 +92,18 @@ class NewEvent : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
                     date_event!!.toString()
             )
 
-            val a = Intent(this@NewEvent, ListEventActivity::class.java)
+            val a = Intent(this@NewEvent, BaseAcitivity::class.java)
+
+            a.putExtra(EXTRA_NAV_FRAGMENT_ID_KEY,R.id.nav_events)
+
             startActivity(a)
         }
 
         btnCancel!!.setOnClickListener {
-            val a = Intent(this@NewEvent, ListEventActivity::class.java)
+            val a = Intent(this@NewEvent, BaseAcitivity::class.java)
+
+            a.putExtra(EXTRA_NAV_FRAGMENT_ID_KEY,R.id.nav_events)
+
             startActivity(a)
         }
 
