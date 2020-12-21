@@ -47,11 +47,12 @@ class DataBase(context: Context?) : SQLiteOpenHelper(context, "beer_catalog.db",
         values.put("description", description_event)
         values.put("date", date_event)
 
-        writableDatabase.update(TABLE_EVENT, values, "ID = ?", arrayOf(id_event))
+        this.writableDatabase.update(TABLE_EVENT, values, "ID=$id_event", null)
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
         db?.execSQL(createDBRequest)
+
         db?.execSQL( "CREATE TABLE $TABLE_BEER (" +
                 "ID integer PRIMARY KEY AUTOINCREMENT," +
                 "name varchar ," +

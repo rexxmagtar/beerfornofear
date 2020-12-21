@@ -40,9 +40,9 @@
                 <TextView
                     android:id="@+id/subtitlepage"
                     android:textSize="18sp"
-                    android:textColor="#4A4E6A"
+                    android:textColor="#FFF"
                     android:layout_marginTop="8dp"
-                    android:text="Finish Them Quickly Today"
+                    android:text="Drink events. Let's go drink!"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
