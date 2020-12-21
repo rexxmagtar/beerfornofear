@@ -71,6 +71,7 @@ class ListEventActivity: AppCompatActivity() {
             notificationAdapter = EventAdapter(this@ListEventActivity, list!!)
             ourdoes!!.adapter = notificationAdapter
 
+
             notificationAdapter!!.notifyDataSetChanged()
         }
     }
