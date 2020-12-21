@@ -72,7 +72,6 @@ class DataBase(context: Context?) : SQLiteOpenHelper(context, "beer_catalog.db",
 
     fun deleteRowFromEventTable(id_event: String) {
         writableDatabase.delete(TABLE_EVENT, "ID=$id_event", null)
-        writableDatabase.update(TABLE_EVENT, values, "ID = ?", arrayOf(id_event))
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
