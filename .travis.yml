@@ -50,6 +50,7 @@ before_script:
 script:
   - ./gradlew clean
   - ./gradlew test
+  - tree
   - ./gradlew connectedAndroidTest
 
 after_success:
