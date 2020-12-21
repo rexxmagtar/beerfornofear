@@ -8,9 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper
 
 
 class DataBase(context: Context?) : SQLiteOpenHelper(context, "beer_catalog.db", null, 4) {
-
-    public val TABLE_EVENT = "Event"
-    public val TABLE_BEER = "Beer"
+    val TABLE_EVENT = "Event"
+    val TABLE_BEER = "Beer"
 
     val createDBRequest = "CREATE TABLE $TABLE_EVENT (" +
             "ID integer PRIMARY KEY AUTOINCREMENT," +
@@ -47,7 +46,7 @@ class DataBase(context: Context?) : SQLiteOpenHelper(context, "beer_catalog.db",
         values.put("description", description_event)
         values.put("date", date_event)
 
-        this.writableDatabase.update(TABLE_EVENT, values, "ID=$id_event", null)
+        writableDatabase.update(TABLE_EVENT, values, "ID=$id_event", null)
     }
 
     fun deleteRowFromEventTable(id_event: String) {

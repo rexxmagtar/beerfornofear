@@ -64,7 +64,7 @@
                 android:layout_height="wrap_content" />
 
             <EditText
-                android:id="@+id/name_event"
+                android:id="@+id/name_event_edit"
                 android:inputType="text"
                 android:background="@drawable/bginputtask"
                 android:paddingLeft="12dp"
@@ -94,7 +94,7 @@
                 android:layout_height="wrap_content" />
 
             <EditText
-                android:id="@+id/desc_event"
+                android:id="@+id/desc_event_edit"
                 android:inputType="text"
                 android:background="@drawable/bginputtask"
                 android:paddingLeft="12dp"

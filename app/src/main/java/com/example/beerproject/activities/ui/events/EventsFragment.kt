@@ -36,12 +36,10 @@ class EventsFragment : Fragment() {
 
         initComponents()
 
-        btnAddNew!!.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View?) {
-                val a = Intent(context, NewEvent::class.java)
-                startActivity(a)
-            }
-        })
+        btnAddNew!!.setOnClickListener {
+            val a = Intent(context, NewEvent::class.java)
+            startActivity(a)
+        }
 
         // get data from DB.
         val cursor = dbHelper!!.getAllFromEventTable()
