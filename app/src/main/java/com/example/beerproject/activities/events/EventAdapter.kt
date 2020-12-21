@@ -28,7 +28,7 @@ class EventAdapter(var context: Context, p: ArrayList<Event>) : RecyclerView.Ada
         val getTitleEvent: String? = Events[i].name
         val getDescEvent: String? = Events[i].description
         val getDateEvent: String? = Events[i].date
-        val getIdEvent: Number? = Events[i].id
+        val getIdEvent: Int? = Events[i].id as Int?
 
         myViewHolder.itemView.setOnClickListener {
             val aa = Intent(context, EditEventActivity::class.java)
@@ -36,7 +36,7 @@ class EventAdapter(var context: Context, p: ArrayList<Event>) : RecyclerView.Ada
             aa.putExtra("name_event", getTitleEvent)
             aa.putExtra("description", getDescEvent)
             aa.putExtra("date", getDateEvent)
-            aa.putExtra("id", getIdEvent)
+            aa.putExtra("ID", getIdEvent.toString())
 
             context.startActivity(aa)
         }
