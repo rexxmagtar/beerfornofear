@@ -13,6 +13,6 @@ import org.junit.Assert.*
 class ExampleUnitTest {
     @Test
     fun testDBUpdate() {
-        assertEquals(1, 3 + 2)
+        assertEquals(5, 3 + 2)
     }
 }
