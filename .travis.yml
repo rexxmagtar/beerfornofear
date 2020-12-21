@@ -1,60 +1,51 @@
-language: java
-sudo: required
+language: android
+dist: trusty
+android:
+  components:
+    # installing tools to start, then use `sdkmanager` below to get the rest
+    - tools
 
-matrix:
-  include:
-    - language: java
-      install: true
-      os: osx
-      osx_image: xcode9.3
-      before_install:
-        - brew update
-        - brew outdated xctool || brew upgrade xctool
-        - npm install -g appium
-      script:
-        - ./gradlew clean build xcuiTest -x test -x signArchives
+before_install:
+  - chmod +x gradlew
 
-    - language: android
-      install: true
-      install:
-        - echo y | android update sdk -u -a -t tools
-        - echo y | android update sdk -u -a -t platform-tools
-        - echo y | android update sdk -u -a -t build-tools-30.0.2
-        - echo y | android update sdk -u -a -t android-30
-        - echo y | android update sdk -u -a -t extra-google-m2repository
-        - echo y | android update sdk -u -a -t extra-android-m2repository
-      os: linux
-      jdk: oraclejdk8
-      android:
-        components:
-          - extra-android-support
-          - sys-img-armeabi-v7a-android-30
-      before_install:
-        - curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash
-        - nvm install 8
-        - node --version
-        - npm --version
-        - npm install -g appium
-        - echo y | android update sdk -a --no-ui --filter android-30
-        - echo y | android update sdk -a --no-ui --filter sys-img-armeabi-v7a-android-30
-        - android list targets | grep -E '^id:' | awk -F '"' '{$1=""; print $2}' # list all targets
-        - echo no | android create avd --force -n test -t android-30 --abi armeabi-v7a
-        - emulator -avd test -no-skin -no-window &
-        - android-wait-for-emulator
-        - adb shell input keyevent 82 &
-        - adb wait-for-device get-serialno
-        - sleep 100
-        - chmod +x gradlew
-        - ./gradlew --version
-        - echo y |adb devices
+addons:
+  apt:
+    sources:
+      - deadsnakes # source required so it finds the package definition below
+    packages:
+      - python3.6
 
-      script:
-      - ./gradlew clean build uiAutomationTest -x test -x signArchives
+before_script:
+  - touch local.properties
 
-before_cache:
-  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-cache:
-  directories:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
+env:
+  global:
+    - ADB_INSTALL_TIMEOUT=8
+    - ABI=armeabi-v7a
+    - EMU_FLAVOR=default # use google_apis flavor if no default flavor emulator
+    # PATH order is incredibly important. e.g. the 'emulator' script exists in more than one place!
+    - ANDROID_HOME=/usr/local/android-sdk
+    - TOOLS=${ANDROID_HOME}/tools
+    - PATH=${ANDROID_HOME}:${ANDROID_HOME}/emulator:${TOOLS}:${TOOLS}/bin:${ANDROID_HOME}/platform-tools:${PATH}
+  matrix:
+    #- ANDROID_TARGET=android-17 ANDROID_ABI=google_apis/armeabi-v7a
+    #- ANDROID_TARGET=android-29 ANDROID_ABI=armeabi-v7a
+    - API=24
+# Emulator Management: Create, Start and Wait
+install:
+  - p="$(which python3 | sed 's/\//\\\//g')" # find python path and replace all / with \/
+  - sed -i "s/buildPython.*/buildPython \"$p\"/" app/build.gradle # insert python interpreter path in gradle build file
+  - echo 'count=0' > /home/travis/.android/repositories.cfg # Avoid harmless sdkmanager warning
+  - echo y | sdkmanager "platform-tools" #>/dev/null
+  - echo y | sdkmanager "tools" #>/dev/null # A second time per Travis docs, gets latest versions
+  - echo y | sdkmanager "build-tools;29.0.2" >/dev/null # Implicit gradle dependency - gradle drives changes
+  - echo y | sdkmanager "platforms;android-$API" >/dev/null # We need the API of the emulator we will run
+  - echo y | sdkmanager "platforms;android-29" >/dev/null # We need the API of the current compileSdkVersion from gradle.properties
+  - echo y | sdkmanager --channel=4 "emulator" # Experiment with canary, specifying 28.0.3 (prior version) did not work
+  - ls -lat ${ANDROID_HOME}/emulator
+  - echo y | sdkmanager "extras;android;m2repository" >/dev/null
+  - echo y | sdkmanager "system-images;android-$API;$EMU_FLAVOR;$ABI" #>/dev/null # install our emulator
+  - echo no | avdmanager create avd --force -n test -k "system-images;android-$API;$EMU_FLAVOR;$ABI" -c 10M
+  - emulator -verbose -avd test -no-accel -no-snapshot -no-window $AUDIO -camera-back none -camera-front none -selinux permissive -qemu -m 1536 &
+  - android-wait-for-emulator
+  - adb shell input keyevent 82 &
