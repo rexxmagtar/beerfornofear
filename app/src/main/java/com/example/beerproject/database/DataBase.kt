@@ -87,4 +87,3 @@ class DataBase(context: Context?) : SQLiteOpenHelper(context, "beer_catalog.db",
 
     }
 }
-
