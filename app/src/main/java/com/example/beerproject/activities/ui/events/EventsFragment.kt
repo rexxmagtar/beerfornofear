@@ -27,22 +27,19 @@ class EventsFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
+        activity?.title = "Events"
 
-        System.out.println("Slideshow created")
         eventsViewModel =
                 ViewModelProvider(this).get(EventsViewModel::class.java)
         val root = inflater.inflate(R.layout.activity_notification_main, container, false)
-
         test = root
 
         initComponents()
 
-        btnAddNew!!.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View?) {
-                val a = Intent(context, NewEvent::class.java)
-                startActivity(a)
-            }
-        })
+        btnAddNew!!.setOnClickListener {
+            val a = Intent(context, NewEvent::class.java)
+            startActivity(a)
+        }
 
         // get data from DB.
         val cursor = dbHelper!!.getAllFromEventTable()
@@ -82,7 +79,7 @@ class EventsFragment : Fragment() {
 
     var dbHelper: DataBase? = null
 
-    fun initComponents() {
+    private fun initComponents() {
         titlepage = test?.findViewById(R.id.titlepage)
         subtitlepage = test?.findViewById(R.id.subtitlepage)
         btnAddNew = test?.findViewById(R.id.btnAddNew)
