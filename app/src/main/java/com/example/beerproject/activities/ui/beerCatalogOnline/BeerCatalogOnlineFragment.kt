@@ -43,6 +43,7 @@ class BeerCatalogOnlineFragment : Fragment() {
 //        val policy: StrictMode.ThreadPolicy = StrictMode.ThreadPolicy.Builder().permitAll().build()
 //        StrictMode.setThreadPolicy(policy)
 
+
         requestPermissions(Array(1) { "android.permission.INTERNET" }, 0)
 
         beerCatalogOnlineViewModel =

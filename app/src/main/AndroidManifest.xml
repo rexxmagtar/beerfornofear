@@ -21,7 +21,7 @@
         <activity
             android:name=".activities.BaseAcitivity"
             android:label="@string/title_activity_base_acitivity"
-            android:theme="@style/Theme.BeerProject.NoActionBar">
+            android:theme="@style/PartyTheme">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

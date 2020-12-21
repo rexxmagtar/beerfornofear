@@ -39,6 +39,8 @@ class BaseAcitivity : AppCompatActivity() {
                 R.id.nav_home, R.id.nav_map, R.id.nav_events, R.id.nav_beer_favorite), drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
