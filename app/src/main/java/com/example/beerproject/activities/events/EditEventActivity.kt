@@ -17,6 +17,7 @@ import androidx.fragment.app.replace
 import androidx.transition.FragmentTransitionSupport
 import com.example.beerproject.R
 import com.example.beerproject.activities.BaseAcitivity
+import com.example.beerproject.activities.EXTRA_NAV_FRAGMENT_ID_KEY
 import com.example.beerproject.activities.ui.events.EventsFragment
 import com.example.beerproject.database.DataBase
 import java.util.*
@@ -117,11 +118,17 @@ class EditEventActivity: AppCompatActivity(), DatePickerDialog.OnDateSetListener
             )
 
             val a = Intent(this@EditEventActivity, BaseAcitivity::class.java)
+
+            a.putExtra(EXTRA_NAV_FRAGMENT_ID_KEY,R.id.nav_events)
+
             startActivity(a)
         }
 
         btnCancel!!.setOnClickListener {
             val a = Intent(this@EditEventActivity, BaseAcitivity::class.java)
+
+            a.putExtra(EXTRA_NAV_FRAGMENT_ID_KEY,R.id.nav_events)
+
             startActivity(a)
         }
 
@@ -129,6 +136,9 @@ class EditEventActivity: AppCompatActivity(), DatePickerDialog.OnDateSetListener
             dbHelper!!.deleteRowFromEventTable(id_text)
 
             val a = Intent(this@EditEventActivity, BaseAcitivity::class.java)
+
+            a.putExtra(EXTRA_NAV_FRAGMENT_ID_KEY,R.id.nav_events)
+
             startActivity(a)
         }
     }
