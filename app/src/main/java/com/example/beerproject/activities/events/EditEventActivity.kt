@@ -22,11 +22,12 @@ class EditEventActivity: AppCompatActivity(), DatePickerDialog.OnDateSetListener
     var description_event: EditText? = null
     var id_event: EditText? = null
 
-    var date_event: String? = "01 01, 2012"
+    var date_event: String? = "21.12.2020 4:34"
 
     var btnSaveUpdate: Button? = null
     var btnCancel: Button? = null
     var btnSetDate: Button? = null
+    var btnDeleteEvent: Button? = null
 
     var dbHelper: DataBase? = null
 
@@ -51,10 +52,7 @@ class EditEventActivity: AppCompatActivity(), DatePickerDialog.OnDateSetListener
         date_event += "$hourOfDay:$minute"
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_notification_edit)
-
+    private fun initComponents() {
         name_event = findViewById(R.id.name_event)
         description_event = findViewById(R.id.desc_event)
 
@@ -63,6 +61,14 @@ class EditEventActivity: AppCompatActivity(), DatePickerDialog.OnDateSetListener
         btnSaveUpdate = findViewById(R.id.btnUpdateEvent)
         btnCancel = findViewById(R.id.btnCancel)
         btnSetDate = findViewById(R.id.btnDateEvent)
+        btnDeleteEvent = findViewById(R.id.btnDeleteEvent)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_notification_edit)
+        initComponents()
+        title = "Edit Event"
 
         btnSetDate!!.setOnClickListener {
             val calendar: Calendar = Calendar.getInstance()
@@ -84,10 +90,10 @@ class EditEventActivity: AppCompatActivity(), DatePickerDialog.OnDateSetListener
 
         dbHelper = DataBase(this)
 
-        btnSaveUpdate!!.setOnClickListener {
-            name_event_text = name_event!!.text.toString()
-            description_event_text = description_event!!.text.toString()
+        name_event_text = name_event!!.text.toString()
+        description_event_text = description_event!!.text.toString()
 
+        btnSaveUpdate!!.setOnClickListener {
             dbHelper!!.updateDataInEventTable(id_text,
                     name_event_text,
                     description_event_text,
@@ -98,6 +104,13 @@ class EditEventActivity: AppCompatActivity(), DatePickerDialog.OnDateSetListener
         }
 
         btnCancel!!.setOnClickListener {
+            val a = Intent(this@EditEventActivity, ListEventActivity::class.java)
+            startActivity(a)
+        }
+
+        btnDeleteEvent!!.setOnClickListener {
+            dbHelper!!.deleteRowFromEventTable(id_text)
+
             val a = Intent(this@EditEventActivity, ListEventActivity::class.java)
             startActivity(a)
         }

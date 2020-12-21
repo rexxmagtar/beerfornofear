@@ -27,12 +27,11 @@ class EventsFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
+        activity?.title = "Events"
 
-        System.out.println("Slideshow created")
         eventsViewModel =
                 ViewModelProvider(this).get(EventsViewModel::class.java)
         val root = inflater.inflate(R.layout.activity_notification_main, container, false)
-
         test = root
 
         initComponents()
@@ -82,7 +81,7 @@ class EventsFragment : Fragment() {
 
     var dbHelper: DataBase? = null
 
-    fun initComponents() {
+    private fun initComponents() {
         titlepage = test?.findViewById(R.id.titlepage)
         subtitlepage = test?.findViewById(R.id.subtitlepage)
         btnAddNew = test?.findViewById(R.id.btnAddNew)

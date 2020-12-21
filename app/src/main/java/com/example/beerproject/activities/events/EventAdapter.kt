@@ -51,7 +51,6 @@ class EventAdapter(var context: Context, p: ArrayList<Event>) : RecyclerView.Ada
         var description: TextView = itemView.findViewById<View>(R.id.description) as TextView  // description of event
         var date: TextView = itemView.findViewById<View>(R.id.date) as TextView // date of event
         var id: TextView = itemView.findViewById<View>(R.id.id_event) as TextView // id of event
-
     }
 
 }

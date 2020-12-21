@@ -14,10 +14,6 @@ import java.util.*
 
 class NewEvent : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
     TimePickerDialog.OnTimeSetListener {
-    var titlepage: TextView? = null
-    var addtitle: TextView? = null
-    var adddesc: TextView? = null
-    var adddate: TextView? = null
 
     private var name_event: EditText? = null
     private var description_event: EditText? = null
@@ -28,10 +24,7 @@ class NewEvent : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
 
     var dbHelper: DataBase? = null
 
-    var doesNum = Random().nextInt()
-    var keydoes = doesNum.toString()
-
-    var date_event: String? = "01 01, 2012"
+    var date_event: String? = "21.12.2020 4:34"
 
     var day: Int = 0
     var month: Int = 0
@@ -54,11 +47,22 @@ class NewEvent : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
         date_event += "$hourOfDay:$minute"
     }
 
+    private fun initComponents() {
+        name_event = findViewById(R.id.name_event)
+        description_event = findViewById(R.id.desc_event)
+
+        btnSaveTask = findViewById(R.id.btnUpdateEvent)
+        btnCancel = findViewById(R.id.btnCancel)
+        btnSetDate = findViewById(R.id.btnDateEvent)
+
+        dbHelper = DataBase(this)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_notification)
-
-        btnSetDate = findViewById(R.id.btnDateEvent)
+        initComponents()
+        title = "Create New Event"
 
         btnSetDate!!.setOnClickListener {
             val calendar: Calendar = Calendar.getInstance()
@@ -70,19 +74,6 @@ class NewEvent : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
 
             dpd.show()
         }
-
-        titlepage = findViewById(R.id.titlepage)
-        addtitle = findViewById(R.id.addtitle)
-        adddesc = findViewById(R.id.adddesc)
-        adddate = findViewById(R.id.adddate)
-
-        name_event = findViewById(R.id.name_event)
-        description_event = findViewById(R.id.desc_event)
-
-        btnSaveTask = findViewById(R.id.btnUpdateEvent)
-        btnCancel = findViewById(R.id.btnCancel)
-
-        dbHelper = DataBase(this)
 
         btnSaveTask!!.setOnClickListener {
             dbHelper!!.insertIntoEventTable(name_event!!.text.toString(),

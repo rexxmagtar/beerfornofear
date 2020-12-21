@@ -153,7 +153,20 @@
         android:background="@drawable/bgbtncreate"
         android:textSize="22sp"
         android:layout_width="match_parent"
-        android:layout_height="55dp" />
+        android:layout_height="45dp" />
+
+    <Button
+        android:id="@+id/btnDeleteEvent"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="20dp"
+        android:text="Delete"
+        android:textColor="#FFF"
+        android:textAllCaps="false"
+        android:background="@drawable/bgbtncreate"
+        android:textSize="22sp"
+        android:layout_width="match_parent"
+        android:layout_height="45dp" />
 
     <Button
         android:id="@+id/btnCancel"
@@ -166,7 +179,7 @@
         android:background="@drawable/bgbtncancel"
         android:textSize="22sp"
         android:layout_width="match_parent"
-        android:layout_height="55dp" />
+        android:layout_height="45dp" />
 
 
 </LinearLayout>
