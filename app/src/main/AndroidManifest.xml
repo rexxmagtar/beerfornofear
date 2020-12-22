@@ -18,7 +18,7 @@
         <activity android:name=".activities.ui.events.ListEventActivity">
 
         </activity>
-
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyAfu-pnT1jEKSXkvMSp31aL4MPyMxbMnP0"/>
         <activity
             android:name=".activities.BaseAcitivity"
             android:label="@string/title_activity_base_acitivity"
