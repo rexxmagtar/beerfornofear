@@ -262,13 +262,13 @@ class BeerCatalogOnlineFragment : Fragment() {
 
     override fun onDetach() {
         super.onDetach()
-        try {
-            System.out.println("trying to cancel job")
-            scope?.cancel("fragment was destroyed")
-            System.out.println("canceled job")
-        } catch (ex: java.lang.Exception) {
-            System.out.println(ex.message)
-        }
+//        try {
+//            System.out.println("trying to cancel job")
+//            scope?.cancel("fragment was destroyed")
+//            System.out.println("canceled job")
+//        } catch (ex: java.lang.Exception) {
+//            System.out.println(ex.message)
+//        }
     }
 
     public fun saveBeerInfo(info: BeerInfoAdapter.BeerInfo) {
