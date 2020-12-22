@@ -15,7 +15,9 @@ This app is suitable for people who appreciate the taste of beer. It has the abi
 ### Contibuting
 ###### Authors
 Ivan Shishlyannikov — team lead, worked with coroutines, API, design, project navigation, database, notifications, travis.
+
 Dmitriy Rogozenko — just a coder, worked with design, database, events, tests. 
+
 Samir Wardak — our senior developer, worked with chicken.
 
 [![Build Status](https://travis-ci.com/rexxmagtar/beerfornofear.svg?branch=main)](https://travis-ci.com/rexxmagtar/beerfornofear)
