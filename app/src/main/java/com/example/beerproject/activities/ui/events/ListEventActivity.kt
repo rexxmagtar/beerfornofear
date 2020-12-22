@@ -1,4 +1,4 @@
-package com.example.beerproject.activities.events
+package com.example.beerproject.activities.ui.events
 
 import android.content.Intent
 import android.os.Bundle
@@ -60,16 +60,23 @@ class ListEventActivity: AppCompatActivity() {
             val dateIndex = cursor.getColumnIndex("date")
 
             do {
-                val event = Event(cursor.getInt(idIndex),
-                        cursor.getString(nameEventIndex),
-                        cursor.getString(descriptionIndex),
-                        cursor.getString(dateIndex))
+                val event = Event(
+                    cursor.getInt(idIndex),
+                    cursor.getString(nameEventIndex),
+                    cursor.getString(descriptionIndex),
+                    cursor.getString(dateIndex)
+                )
 
                 list!!.add(event)
             } while (cursor.moveToNext())
 
-            notificationAdapter = EventAdapter(this@ListEventActivity, list!!)
+            notificationAdapter =
+                EventAdapter(
+                    this@ListEventActivity,
+                    list!!
+                )
             ourdoes!!.adapter = notificationAdapter
+
 
             notificationAdapter!!.notifyDataSetChanged()
         }

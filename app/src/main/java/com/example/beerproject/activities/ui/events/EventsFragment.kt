@@ -12,9 +12,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.beerproject.R
-import com.example.beerproject.activities.events.Event
-import com.example.beerproject.activities.events.EventAdapter
-import com.example.beerproject.activities.events.NewEvent
 import com.example.beerproject.database.DataBase
 
 class EventsFragment : Fragment() {
@@ -27,22 +24,19 @@ class EventsFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
+        activity?.title = "Events"
 
-        System.out.println("Slideshow created")
         eventsViewModel =
                 ViewModelProvider(this).get(EventsViewModel::class.java)
         val root = inflater.inflate(R.layout.activity_notification_main, container, false)
-
         test = root
 
         initComponents()
 
-        btnAddNew!!.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View?) {
-                val a = Intent(context, NewEvent::class.java)
-                startActivity(a)
-            }
-        })
+        btnAddNew!!.setOnClickListener {
+            val a = Intent(context, NewEvent::class.java)
+            startActivity(a)
+        }
 
         // get data from DB.
         val cursor = dbHelper!!.getAllFromEventTable()
@@ -54,15 +48,21 @@ class EventsFragment : Fragment() {
             val dateIndex = cursor.getColumnIndex("date")
 
             do {
-                val event = Event(cursor.getInt(idIndex),
+                val event = Event(
+                    cursor.getInt(idIndex),
                     cursor.getString(nameEventIndex),
                     cursor.getString(descriptionIndex),
-                    cursor.getString(dateIndex))
+                    cursor.getString(dateIndex)
+                )
 
                 list!!.add(event)
             } while (cursor.moveToNext())
 
-            notificationAdapter = EventAdapter(requireContext(), list!!)
+            notificationAdapter =
+                EventAdapter(
+                    requireContext(),
+                    list!!
+                )
             ourdoes!!.adapter = notificationAdapter
 
             notificationAdapter!!.notifyDataSetChanged()
@@ -82,7 +82,7 @@ class EventsFragment : Fragment() {
 
     var dbHelper: DataBase? = null
 
-    fun initComponents() {
+    private fun initComponents() {
         titlepage = test?.findViewById(R.id.titlepage)
         subtitlepage = test?.findViewById(R.id.subtitlepage)
         btnAddNew = test?.findViewById(R.id.btnAddNew)

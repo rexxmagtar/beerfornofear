@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.beerproject">
-    <meta-data
-        android:name="com.google.android.geo.API_KEY"
-        android:value="@string/google_maps_key" />
+
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <application
+        android:networkSecurityConfig="@xml/network_security_config"
         android:theme="@style/Theme.BeerProject"
-        android:usesCleartextTraffic="true"
-        android:networkSecurityConfig="@xml/network_security_config">
+        android:usesCleartextTraffic="true">
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -16,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BeerProject">
 
-        <activity android:name=".activities.events.ListEventActivity">
+        <activity android:name=".activities.ui.events.ListEventActivity">
 
         </activity>
 
@@ -31,16 +30,22 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activities.events.NewEvent">
+        <activity android:name=".activities.ui.events.NewEvent">
 
         </activity>
-        <activity android:name=".activities.events.EditEventActivity">
+        <activity android:name=".activities.ui.events.EditEventActivity">
 
         </activity>
 
         <activity android:name=".MainActivity">
 
         </activity>
+
+        <service
+            android:name=".activities.ui.events.notifyService.MyService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":MyServiceProcess"></service>
     </application>
 
 </manifest>
