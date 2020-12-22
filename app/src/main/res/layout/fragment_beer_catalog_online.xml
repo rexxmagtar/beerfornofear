@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.ui.beerCatalogOnline.BeerCatalogOnlineFragment"
-    android:background="@color/teal_200">
+    android:background="@drawable/beer_bg">
 
     <ListView
         android:id="@+id/beerList"

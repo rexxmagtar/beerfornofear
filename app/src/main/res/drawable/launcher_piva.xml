@@ -5,8 +5,9 @@
     </item>
     <item>
         <bitmap
-            android:src="@drawable/vodka"
+            android:src="@drawable/go_drink_beer"
             android:tileMode="disabled"
+            
             android:gravity="center"/>
     </item>
 </layer-list>

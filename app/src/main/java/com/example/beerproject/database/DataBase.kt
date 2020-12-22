@@ -18,7 +18,7 @@ class DataBase(context: Context?) : SQLiteOpenHelper(context, "beer_catalog.db",
             "date datetime" +
             ");"
 
-    fun insertIntoEventTable(name_event: String, description_event: String, date_event: String) {
+    fun insertIntoEventTable(name_event: String, description_event: String, date_event: String): Long {
         val values = ContentValues()
 
         values.put("name_event", name_event)
@@ -40,10 +40,10 @@ class DataBase(context: Context?) : SQLiteOpenHelper(context, "beer_catalog.db",
             null,
             null
         ).moveToFirst()){
-           return
+           return -1
        }
 
-        writableDatabase.insert(TABLE_EVENT, null, values);
+        return writableDatabase.insert(TABLE_EVENT, null, values);
     }
 
     fun getAllFromEventTable(): Cursor {
@@ -61,17 +61,17 @@ class DataBase(context: Context?) : SQLiteOpenHelper(context, "beer_catalog.db",
     fun updateDataInEventTable(
         id_event: String, name_event: String,
         description_event: String, date_event: String
-    ) {
+    ): Int {
         val values = ContentValues()
 
         values.put("name_event", name_event)
         values.put("description", description_event)
         values.put("date", date_event)
-        writableDatabase.update(TABLE_EVENT, values, "ID=$id_event", null)
+        return writableDatabase.update(TABLE_EVENT, values, "ID=$id_event", null)
     }
 
-    fun deleteRowFromEventTable(id_event: String) {
-        writableDatabase.delete(TABLE_EVENT, "ID=$id_event", null)
+    fun deleteRowFromEventTable(id_event: String): Int {
+        return writableDatabase.delete(TABLE_EVENT, "ID=$id_event", null)
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
