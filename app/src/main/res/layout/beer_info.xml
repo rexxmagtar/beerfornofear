@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="5dp"
+    android:background="@drawable/bgitemdoes"
     android:orientation="vertical">
 
     <TextView
@@ -13,10 +15,11 @@
         android:layout_weight="0"
         android:gravity="start"
         android:text="TextView"
-        android:textSize="30dp"
-        android:textColor="@color/black"
+        android:textColor="#000C5D"
+        android:textSize="22sp"
         android:paddingBottom="15dp"
-        android:paddingLeft="5dp"/>
+        android:paddingLeft="5dp"
+        android:paddingStart="5dp" />
 
     <LinearLayout
         android:id="@+id/AdditionalBeerInfo"
@@ -32,6 +35,7 @@
             android:layout_height="200dp"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
+            android:paddingBottom="15dp"
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
@@ -39,9 +43,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView"
-            android:textSize="24dp"
-            android:paddingLeft="5dp"
-            android:textColor="@color/black"/>
+            android:textSize="18sp"
+            android:textColor="#ADADAD"
+            android:paddingLeft="5dp"/>
     </LinearLayout>
 
 </LinearLayout>

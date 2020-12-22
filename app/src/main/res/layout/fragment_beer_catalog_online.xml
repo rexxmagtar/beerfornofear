@@ -5,12 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.ui.beerCatalogOnline.BeerCatalogOnlineFragment"
-    android:background="@drawable/beer_bg">
+    >
 
     <ListView
         android:id="@+id/beerList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
