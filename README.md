@@ -17,7 +17,7 @@ beer_catalog_place
 ##### Events
 Go to the "Events" section. Here you can watch various events to celebrate and have a beer.
 
-![EventsList](https://github.com/rexxmagtar/beerfornofear/blob/main/blob/usage_event_1.jpg){:height="50%" width="50%"}
+<img src="https://github.com/rexxmagtar/beerfornofear/blob/main/blob/usage_event_1.jpg" width="25%" height="50%">
 
 Try to create your own events and set the date.
 
