@@ -39,5 +39,5 @@ Ivan Shishlyannikov — team lead, worked with coroutines, API, design, project 
 
 Dmitriy Rogozenko — just a coder, worked with design, database, events, tests. 
 
-Samir Wardak — our senior developer, worked with chicken.
+Samir Wardak — our senior developer, worked with chicken, map.
 ![Python developer](https://github.com/rexxmagtar/beerfornofear/blob/main/blob/samuur.png)
