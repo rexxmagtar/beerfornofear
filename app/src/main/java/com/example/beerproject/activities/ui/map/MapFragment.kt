@@ -14,11 +14,9 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
-import com.example.beerproject.activities.ui.map.models.Place
 
 class MapFragment : Fragment(), OnMapReadyCallback {
     private lateinit var mMap: GoogleMap
-    private lateinit var userMap: List<Place>
     private lateinit var mapViewModel: MapViewModel
 
     override fun onCreateView(
@@ -36,12 +34,10 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-        mapViewModel =
-            ViewModelProvider(this).get(MapViewModel::class.java)
+        mapViewModel = ViewModelProvider(this).get(MapViewModel::class.java)
 
-        userMap = mapViewModel._place.value!!
         val boundsBuilder = LatLngBounds.Builder()
-        for (place in userMap) {
+        for (place in mapViewModel._place.value!!) {
             val latLng = LatLng(place.latitude, place.longitude)
             boundsBuilder.include(latLng)
             mMap.addMarker(
