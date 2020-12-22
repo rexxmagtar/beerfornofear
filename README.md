@@ -47,6 +47,9 @@ Long press on beer title will save beer information as you favorite.
 
 Go to the "Beer catalog" section. Here you can see your favorite beer types. Short press on beer title will show additional beer info.
 Works in offline mode.
+Long press on beer title removes beer info from favorites list.
+
+<img src="https://github.com/rexxmagtar/beerfornofear/blob/main/blob/Favorite_beer_.png" width="25%" height="50%">
 
 ### Contibuting
 ###### Authors
