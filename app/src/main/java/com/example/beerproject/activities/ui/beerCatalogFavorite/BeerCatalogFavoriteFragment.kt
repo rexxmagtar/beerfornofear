@@ -18,6 +18,7 @@ import com.example.beerproject.database.DataBase
 import java.io.ByteArrayOutputStream
 import java.util.ArrayList
 
+
 class BeerCatalogFavoriteFragment : Fragment() {
 
     private lateinit var beerCatalogFavoriteViewModel: BeerCatalogFavoriteViewModel
@@ -31,7 +32,6 @@ class BeerCatalogFavoriteFragment : Fragment() {
             ViewModelProvider(this).get(BeerCatalogFavoriteViewModel::class.java)
 
         val root = inflater.inflate(R.layout.fragment_beer_catalog_favorite, container, false)
-
 
         var infoes = loadBeerInfo()
 

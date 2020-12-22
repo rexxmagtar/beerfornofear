@@ -29,6 +29,16 @@ import java.net.URL
 import kotlin.math.min
 
 
+fun getDrawableBytes(d: Drawable): ByteArray {
+
+    val bitmap = (d as BitmapDrawable).bitmap
+    val stream = ByteArrayOutputStream()
+    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+    val bitmapdata: ByteArray = stream.toByteArray()
+
+    return bitmapdata
+}
+
 class BeerCatalogOnlineFragment : Fragment() {
 
     private lateinit var beerCatalogOnlineViewModel: BeerCatalogOnlineViewModel
@@ -298,16 +308,6 @@ class BeerCatalogOnlineFragment : Fragment() {
             Toast.makeText(context, "Beer info added to favorites", Toast.LENGTH_SHORT).show()
         }
 
-    }
-
-    public fun getDrawableBytes(d: Drawable): ByteArray {
-
-        val bitmap = (d as BitmapDrawable).bitmap
-        val stream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
-        val bitmapdata: ByteArray = stream.toByteArray()
-
-        return bitmapdata
     }
 
 }

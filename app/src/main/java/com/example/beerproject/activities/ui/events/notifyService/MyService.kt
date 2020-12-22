@@ -13,16 +13,14 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationCompat.PRIORITY_MIN
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import com.example.beerproject.MainActivity
 import com.example.beerproject.activities.BaseAcitivity
-import com.example.beerproject.activities.events.Event
+import com.example.beerproject.activities.ui.events.Event
 import com.example.beerproject.database.DataBase
 import kotlinx.coroutines.*
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import java.util.concurrent.TimeUnit
 
 
 class MyService : Service() {
@@ -154,7 +152,13 @@ class MyService : Service() {
 
                         date = l.format(formatter) + " 12:00"
 
-                        var event = Event(null, name, description, date)
+                        var event =
+                            Event(
+                                null,
+                                name,
+                                description,
+                                date
+                            )
 
                         DataBase(this@MyService).insertIntoEventTable(name, description, date)
 

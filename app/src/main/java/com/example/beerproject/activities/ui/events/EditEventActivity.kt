@@ -1,4 +1,4 @@
-package com.example.beerproject.activities.events
+package com.example.beerproject.activities.ui.events
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
@@ -10,15 +10,9 @@ import android.widget.DatePicker
 import android.widget.EditText
 import android.widget.TimePicker
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
-import androidx.fragment.app.replace
-import androidx.transition.FragmentTransitionSupport
 import com.example.beerproject.R
 import com.example.beerproject.activities.BaseAcitivity
 import com.example.beerproject.activities.EXTRA_NAV_FRAGMENT_ID_KEY
-import com.example.beerproject.activities.ui.events.EventsFragment
 import com.example.beerproject.database.DataBase
 import java.util.*
 

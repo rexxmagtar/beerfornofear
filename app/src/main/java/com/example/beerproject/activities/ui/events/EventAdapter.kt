@@ -1,4 +1,4 @@
-package com.example.beerproject.activities.events
+package com.example.beerproject.activities.ui.events
 
 import android.content.Context
 import android.content.Intent
