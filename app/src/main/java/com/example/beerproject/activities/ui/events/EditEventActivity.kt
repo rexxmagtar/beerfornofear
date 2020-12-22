@@ -3,17 +3,21 @@ package com.example.beerproject.activities.ui.events
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.text.format.DateFormat
 import android.widget.Button
 import android.widget.DatePicker
 import android.widget.EditText
 import android.widget.TimePicker
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.beerproject.R
 import com.example.beerproject.activities.BaseAcitivity
 import com.example.beerproject.activities.EXTRA_NAV_FRAGMENT_ID_KEY
 import com.example.beerproject.database.DataBase
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 
@@ -67,11 +71,18 @@ class EditEventActivity: AppCompatActivity(), DatePickerDialog.OnDateSetListener
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun initComponents() {
         name_event = findViewById(R.id.name_event_edit)
         description_event = findViewById(R.id.desc_event_edit)
 
         id_event = findViewById(R.id.id_event)
+
+        val current = LocalDateTime.now()
+
+        val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")
+        date_event = current.format(formatter).toString()
+
 
         btnSaveUpdate = findViewById(R.id.btnUpdateEvent)
         btnCancel = findViewById(R.id.btnCancel)
@@ -79,6 +90,7 @@ class EditEventActivity: AppCompatActivity(), DatePickerDialog.OnDateSetListener
         btnDeleteEvent = findViewById(R.id.btnDeleteEvent)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notification_edit)

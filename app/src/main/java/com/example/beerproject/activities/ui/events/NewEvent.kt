@@ -3,14 +3,18 @@ package com.example.beerproject.activities.ui.events
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.text.format.DateFormat
 import android.widget.*
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.beerproject.R
 import com.example.beerproject.activities.BaseAcitivity
 import com.example.beerproject.activities.EXTRA_NAV_FRAGMENT_ID_KEY
 import com.example.beerproject.database.DataBase
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 
@@ -62,6 +66,7 @@ class NewEvent : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun initComponents() {
         name_event = findViewById(R.id.name_event)
         description_event = findViewById(R.id.desc_event)
@@ -70,9 +75,15 @@ class NewEvent : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
         btnCancel = findViewById(R.id.btnCancel)
         btnSetDate = findViewById(R.id.btnDateEvent)
 
+        val current = LocalDateTime.now()
+
+        val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")
+        date_event = current.format(formatter).toString()
+
         dbHelper = DataBase(this)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_notification)
