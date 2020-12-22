@@ -33,7 +33,7 @@
                     android:layout_marginTop="20dp"
                     android:textSize="32sp"
                     android:textColor="#FFF"
-                    android:text="Events"
+                    android:text="@string/events"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -42,7 +42,7 @@
                     android:textSize="18sp"
                     android:textColor="#FFF"
                     android:layout_marginTop="8dp"
-                    android:text="Drink events. Let's go drink!"
+                    android:text="@string/drink_events_let_s_go_drink"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
