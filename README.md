@@ -16,7 +16,7 @@ You have to use beer_cataloge.apk file. It is located in the build_apk folder.
 
 <b>Option 1.</b> You can download this file and unpack it as apk
 
-<b>Option 2.</b> With your Android SDK. You must go into it and register the following command: adb install beer_cataloge.apk.
+<b>Option 2.</b> With your Android SDK. You must go into it and register the following command: <i>adb install beer_cataloge.apk</i>.
 
 ##### Events
 Go to the "Events" section. Here you can watch various events to celebrate and have a beer.
