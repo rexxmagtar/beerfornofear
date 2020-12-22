@@ -12,9 +12,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.beerproject.R
-import com.example.beerproject.activities.events.Event
-import com.example.beerproject.activities.events.EventAdapter
-import com.example.beerproject.activities.events.NewEvent
 import com.example.beerproject.database.DataBase
 
 class EventsFragment : Fragment() {
@@ -51,15 +48,21 @@ class EventsFragment : Fragment() {
             val dateIndex = cursor.getColumnIndex("date")
 
             do {
-                val event = Event(cursor.getInt(idIndex),
+                val event = Event(
+                    cursor.getInt(idIndex),
                     cursor.getString(nameEventIndex),
                     cursor.getString(descriptionIndex),
-                    cursor.getString(dateIndex))
+                    cursor.getString(dateIndex)
+                )
 
                 list!!.add(event)
             } while (cursor.moveToNext())
 
-            notificationAdapter = EventAdapter(requireContext(), list!!)
+            notificationAdapter =
+                EventAdapter(
+                    requireContext(),
+                    list!!
+                )
             ourdoes!!.adapter = notificationAdapter
 
             notificationAdapter!!.notifyDataSetChanged()

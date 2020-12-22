@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BeerProject">
 
-        <activity android:name=".activities.events.ListEventActivity">
+        <activity android:name=".activities.ui.events.ListEventActivity">
 
         </activity>
 
@@ -30,10 +30,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activities.events.NewEvent">
+        <activity android:name=".activities.ui.events.NewEvent">
 
         </activity>
-        <activity android:name=".activities.events.EditEventActivity">
+        <activity android:name=".activities.ui.events.EditEventActivity">
 
         </activity>
 

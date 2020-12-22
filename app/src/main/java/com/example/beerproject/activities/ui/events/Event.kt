@@ -1,4 +1,4 @@
-package com.example.beerproject.activities.events
+package com.example.beerproject.activities.ui.events
 
 class Event {
     var id: Number? = null

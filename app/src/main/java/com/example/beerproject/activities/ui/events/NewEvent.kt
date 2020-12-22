@@ -1,4 +1,4 @@
-package com.example.beerproject.activities.events
+package com.example.beerproject.activities.ui.events
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
