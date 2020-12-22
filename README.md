@@ -38,5 +38,6 @@ Ivan Shishlyannikov — team lead, worked with coroutines, API, design, project 
 Dmitriy Rogozenko — just a coder, worked with design, database, events, tests. 
 
 Samir Wardak — our senior developer, worked with chicken.
+![Python developer](https://github.com/rexxmagtar/beerfornofear/blob/main/blob/samuur.png)
 
 [![Build Status](https://travis-ci.com/rexxmagtar/beerfornofear.svg?branch=main)](https://travis-ci.com/rexxmagtar/beerfornofear)
