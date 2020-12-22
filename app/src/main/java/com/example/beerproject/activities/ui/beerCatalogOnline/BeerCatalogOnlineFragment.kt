@@ -69,6 +69,8 @@ class BeerCatalogOnlineFragment : Fragment() {
 
         listView.adapter = adapter;
 
+        adapter.infoes = ArrayList()
+
         getBeerInfo(10000) {
 
             try {
@@ -82,7 +84,9 @@ class BeerCatalogOnlineFragment : Fragment() {
                     }
 
                     try {
-                        adapter.infoes = it;
+                        adapter.infoes!!.clear();
+                        adapter.infoes!!.addAll(it!!);
+
                         adapter.notifyDataSetChanged();
                     } catch (ex: java.lang.Exception) {
                         System.out.println("Exception " + ex.message)
@@ -211,7 +215,7 @@ class BeerCatalogOnlineFragment : Fragment() {
 
                         result!!.add(beerInfo)
 
-//                        listener.invoke(result);
+                        listener.invoke(result);
 
                     }
 
