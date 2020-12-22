@@ -8,7 +8,8 @@
             android:id="@+id/nav_home"
             android:icon="@drawable/pivo_action_name"
             android:title="@string/menu_beer_catalog_online"
-            android:iconTint="@color/black"/>
+            android:iconTint="@color/black"
+            />
         <item
             android:id="@+id/nav_beer_favorite"
             android:icon="@drawable/favorite_action_name"

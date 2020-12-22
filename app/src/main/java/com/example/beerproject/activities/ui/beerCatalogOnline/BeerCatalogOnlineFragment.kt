@@ -211,7 +211,7 @@ class BeerCatalogOnlineFragment : Fragment() {
 
                         result!!.add(beerInfo)
 
-                        listener.invoke(result);
+//                        listener.invoke(result);
 
                     }
 
