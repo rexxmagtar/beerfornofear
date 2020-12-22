@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">BeerProject</string>
+    <string name="title_activity_base_acitivity">BaseAcitivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Beer for no fear</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Настройки</string>
+
+    <string name="menu_beer_catalog_online">Пивной каталог</string>
+    <string name="menu_map">Карта</string>
+    <string name="menu_events">События</string>
+    <string name="beer_favorite">Избранное</string>
+    <string name="create_new_event">Создать новое событие</string>
+    <string name="add_title">Добавьте название</string>
+    <string name="what_you_do">Название</string>
+    <string name="description">Описание</string>
+    <string name="how_to">Как пройдёт событие?</string>
+    <string name="timeline">Дата</string>
+    <string name="set_time">Установить время</string>
+    <string name="create_now">Создать</string>
+    <string name="cancel">Назад</string>
+    <string name="update_info_event">Обновить информацию</string>
+    <string name="delete">Удалить</string>
+    <string name="events">События</string>
+    <string name="drink_events_let_s_go_drink">Давайте пить пиво!</string>
+</resources>

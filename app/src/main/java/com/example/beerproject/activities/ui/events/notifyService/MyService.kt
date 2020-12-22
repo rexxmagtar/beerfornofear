@@ -26,7 +26,7 @@ import java.time.format.DateTimeFormatter
 class MyService : Service() {
     var nm: NotificationManager? = null
 
-    private var notificationPeriodSeconds = 60*60*1;
+    private var notificationPeriodSeconds = 60 * 60 * 1;
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate() {
@@ -221,6 +221,7 @@ class MyService : Service() {
 
 //                    Log.println(Log.INFO, "SERVICE", "date: $date")
 
+                    println(date)
                     val l =
                         LocalDateTime.parse(date, DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"))
 

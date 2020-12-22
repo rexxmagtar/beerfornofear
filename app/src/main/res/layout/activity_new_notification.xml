@@ -21,7 +21,7 @@
             android:layout_marginTop="20dp"
             android:textSize="26sp"
             android:textColor="#FFF"
-            android:text="Create New Event"
+            android:text="@string/create_new_event"
             android:textAlignment="center"
             android:layout_marginBottom="18dp"
             android:layout_width="match_parent"
@@ -58,7 +58,7 @@
                 android:id="@+id/addtitle"
                 android:textSize="18sp"
                 android:textColor="@color/colorPrimaryDark"
-                android:text="Add Title"
+                android:text="@string/add_title"
                 android:layout_marginBottom="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -70,7 +70,7 @@
                 android:paddingLeft="12dp"
                 android:textColorHint="#B5B5B5"
                 android:textColor="@color/colorPrimaryDark"
-                android:hint="What You Do?"
+                android:hint="@string/what_you_do"
                 android:layout_width="match_parent"
                 android:layout_height="55dp" />
 
@@ -88,7 +88,7 @@
                 android:id="@+id/adddesc"
                 android:textSize="18sp"
                 android:textColor="@color/colorPrimaryDark"
-                android:text="Description"
+                android:text="@string/description"
                 android:layout_marginBottom="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -101,7 +101,7 @@
                 android:textColorHint="#B5B5B5"
                 android:maxLength="25"
                 android:textColor="@color/colorPrimaryDark"
-                android:hint="How to?"
+                android:hint="@string/how_to"
                 android:layout_width="match_parent"
                 android:layout_height="55dp" />
 
@@ -119,7 +119,7 @@
                 android:id="@+id/adddate"
                 android:textSize="18sp"
                 android:textColor="@color/colorPrimaryDark"
-                android:text="Timeline"
+                android:text="@string/timeline"
                 android:layout_marginBottom="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -132,7 +132,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="16dp"
                 android:background="@drawable/bgbtncreate"
-                android:text="Set time"
+                android:text="@string/set_time"
                 android:textAllCaps="false"
                 android:textColor="#FFF"
                 android:textSize="22sp" />
@@ -147,7 +147,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="20dp"
-        android:text="Create Now"
+        android:text="@string/create_now"
         android:textColor="#FFF"
         android:textAllCaps="false"
         android:background="@drawable/bgbtncreate"
@@ -160,7 +160,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="14dp"
-        android:text="Cancel"
+        android:text="@string/cancel"
         android:textColor="#AFAFAF"
         android:textAllCaps="false"
         android:background="@drawable/bgbtncancel"
