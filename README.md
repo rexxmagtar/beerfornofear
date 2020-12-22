@@ -21,7 +21,15 @@ Go to the "Events" section. Here you can watch various events to celebrate and h
 
 Try to create your own events and set the date.
 
-![EventsNewCreate](https://github.com/rexxmagtar/beerfornofear/blob/main/blob/usage_event_2.jpg)
+<img src="https://github.com/rexxmagtar/beerfornofear/blob/main/blob/usage_event_2.jpg" width="25%" height="50%">
+
+You can set the date in a very convenient way by selecting the desired month and day in the calendar.
+
+<img src="https://github.com/rexxmagtar/beerfornofear/blob/main/blob/usage_event_3.jpg" width="25%" height="50%">
+
+You can also modify events: change the date or description, or completely delete this event.
+
+<img src="https://github.com/rexxmagtar/beerfornofear/blob/main/blob/usage_event_4.jpg" width="25%" height="50%">
 
 ### Contibuting
 ###### Authors
