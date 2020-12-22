@@ -33,6 +33,24 @@ You can also modify events: change the date or description, or completely delete
 
 <img src="https://github.com/rexxmagtar/beerfornofear/blob/main/blob/usage_event_4.jpg" width="25%" height="50%">
 
+
+##### Beer catalog
+Go to the "Beer catalog" section. Here you can see different beer types. Short press on beer title will show additional beer info.
+
+<img src="https://github.com/rexxmagtar/beerfornofear/blob/main/blob/Catalog_usage_1.png" width="25%" height="50%">
+
+Long press on beer title will save beer information as you favorite.
+
+<img src="https://github.com/rexxmagtar/beerfornofear/blob/main/blob/Catalog_usage_2.png" width="25%" height="50%">
+
+##### Favorite beer catalog
+
+Go to the "Beer catalog" section. Here you can see your favorite beer types. Short press on beer title will show additional beer info.
+Works in offline mode.
+Long press on beer title removes beer info from favorites list.
+
+<img src="https://github.com/rexxmagtar/beerfornofear/blob/main/blob/Favorite_beer_.png" width="25%" height="50%">
+
 ### Contibuting
 ###### Authors
 Ivan Shishlyannikov — team lead, worked with coroutines, API, design, project navigation, database, notifications, travis.

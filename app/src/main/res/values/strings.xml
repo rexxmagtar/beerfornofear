@@ -12,4 +12,17 @@
     <string name="menu_map">Map</string>
     <string name="menu_events">Events</string>
     <string name="beer_favorite">Favorite</string>
+    <string name="create_new_event">Create New Event</string>
+    <string name="add_title">Add Title</string>
+    <string name="what_you_do">Title</string>
+    <string name="description">Description</string>
+    <string name="how_to">How to?</string>
+    <string name="timeline">Timeline</string>
+    <string name="set_time">Set time</string>
+    <string name="create_now">Create Now</string>
+    <string name="cancel">Cancel</string>
+    <string name="update_info_event">Update Info Event</string>
+    <string name="delete">Delete</string>
+    <string name="events">Events</string>
+    <string name="drink_events_let_s_go_drink">Drink events. Let\'s go drink!</string>
 </resources>

@@ -7,13 +7,11 @@
     <application
         android:networkSecurityConfig="@xml/network_security_config"
         android:theme="@style/Theme.BeerProject"
-        android:usesCleartextTraffic="true">
-        android:allowBackup="true"
+        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.BeerProject">
+        android:supportsRtl="true">
 
         <activity android:name=".activities.ui.events.ListEventActivity">
 
@@ -21,8 +19,9 @@
         <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyAfu-pnT1jEKSXkvMSp31aL4MPyMxbMnP0"/>
         <activity
             android:name=".activities.BaseAcitivity"
-            android:label="@string/title_activity_base_acitivity"
-            android:theme="@style/PartyTheme">
+            android:label="@string/app_name"
+            android:theme="@style/PartyTheme"
+            android:icon="@drawable/launcher_piva">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
