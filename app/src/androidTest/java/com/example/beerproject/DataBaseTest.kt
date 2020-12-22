@@ -58,18 +58,4 @@ class DataBaseTest {
 
         dbHelper.deleteRowFromEventTable(idVodka.toString())
     }
-
-    @Test
-    fun failedtestDBInsertRow() {
-        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-
-        val dbHelper = DataBase(appContext)
-
-        val idVodka = dbHelper.insertIntoEventTable("drink_vodka",
-            "Svayak is coming", "31.12.2020 23:55")
-
-        assertEquals(-1, dbHelper.deleteRowFromEventTable(idVodka.toString()))
-
-        dbHelper.deleteRowFromEventTable(idVodka.toString())
-    }
 }
