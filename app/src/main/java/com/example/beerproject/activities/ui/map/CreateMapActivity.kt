@@ -28,6 +28,7 @@ import com.example.beerproject.activities.ui.map.models.UserMap
 import com.example.beerproject.R
 
 private const val TAG = "CreateMapActivity"
+
 class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
@@ -64,7 +65,7 @@ class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
                 return true
             }
             val places = markers.map { marker -> Place(marker.title, marker.snippet, marker.position.latitude, marker.position.longitude) }
-            val userMap = UserMap(intent.getStringExtra(EXTRA_MAP_TITLE), places)
+            val userMap = intent.getStringExtra(EXTRA_MAP_TITLE)?.let { UserMap(it, places) }
             val data = Intent()
             data.putExtra(EXTRA_USER_MAP, userMap)
             setResult(Activity.RESULT_OK, data)

@@ -10,62 +10,65 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.gms.maps.model.LatLng
+import androidx.recyclerview.widget.RecyclerView
 import com.example.beerproject.activities.ui.map.models.Place
 import com.example.beerproject.activities.ui.map.models.UserMap
 import java.io.*
 import com.example.beerproject.R
+import com.example.beerproject.activities.ui.events.EventsViewModel
+import com.example.beerproject.database.DataBase
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 const val EXTRA_USER_MAP = "EXTRA_USER_MAP"
 const val EXTRA_MAP_TITLE = "EXTRA_MAP_TITLE"
 private const val FILENAME = "UserMaps.data"
 private const val REQUEST_CODE = 1234
 private const val TAG = "MapFragment"
-
 class MapFragment : Fragment() {
 
-    private lateinit var mapViewModel: MapViewModel
     private lateinit var userMaps: MutableList<UserMap>
     private lateinit var mapAdapter: MapsAdapter
+
+    var rvMaps: RecyclerView? = null
+    var fabCreateMap: FloatingActionButton? = null
+
+    var test: View? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        mapViewModel =
-            ViewModelProvider(this).get(MapViewModel::class.java)
-
-
         val root = inflater.inflate(R.layout.fragment_map, container, false)
-        val textView: TextView = root.findViewById(R.id.text_gallery)
+
+        test = root
+
+        initComponents()
 
 
-        userMaps = deserializeUserMaps(this).toMutableList()
+        userMaps = context?.let { deserializeUserMaps(it).toMutableList() }!!
         // Set layout manager on the recycler view
-        rvMaps.layoutManager = LinearLayoutManager(this)
+        rvMaps?.layoutManager = LinearLayoutManager(context)
         // Set adapter on the recycler view
-        mapAdapter = MapsAdapter(this, userMaps, object: MapsAdapter.OnClickListener {
+        mapAdapter = MapsAdapter(requireContext(), userMaps, object: MapsAdapter.OnClickListener {
             override fun onItemClick(position: Int) {
                 Log.i(TAG, "onItemClick $position")
                 // When user taps on view in RV, navigate to new activity
-                val intent = Intent(this@MapFragment, DisplayMapActivity::class.java)
+                val intent = Intent(context, DisplayMapActivity::class.java)
                 intent.putExtra(EXTRA_USER_MAP, userMaps[position])
                 startActivity(intent)
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
             }
 
             override fun onItemLongClick(position: Int) {
                 Log.i(TAG, "onItemLongClick at position $position")
                 val dialog =
-                    AlertDialog.Builder(this@MapFragment)
+                    AlertDialog.Builder(context!!)
                         .setTitle("Delete this map?")
                         .setMessage("Are you sure you want to delete this map?")
                         .setNegativeButton("Cancel", null)
@@ -75,42 +78,50 @@ class MapFragment : Fragment() {
                     userMaps.removeAt(position)
                     mapAdapter.notifyItemRemoved(position)
                     mapAdapter.notifyItemRangeChanged(position, mapAdapter.itemCount)
-                    serializeUserMaps(this@MapFragment, userMaps)
+                    serializeUserMaps(context!!, userMaps)
                     dialog.dismiss()
                 }
             }
         })
-        rvMaps.adapter = mapAdapter
+        rvMaps?.adapter = mapAdapter
 
-        fabCreateMap.setOnClickListener {
+        fabCreateMap?.setOnClickListener {
             Log.i(TAG, "Tap on FAB")
             showAlertDialog()
         }
+        return fabCreateMap
+    }
 
-        return root
+    fun initComponents() {
+        rvMaps = test?.findViewById(R.id.rvMaps)
+        fabCreateMap = test?.findViewById(R.id.fabCreateMap)
     }
 
     private fun showAlertDialog() {
-        val mapFormView = LayoutInflater.from(this).inflate(R.layout.dialog_create_map, null)
+        val mapFormView = LayoutInflater.from(context).inflate(R.layout.dialog_create_map, null)
         val dialog =
-            AlertDialog.Builder(this)
-                .setTitle("Map title")
-                .setView(mapFormView)
-                .setNegativeButton("Cancel", null)
-                .setPositiveButton("OK", null)
-                .show()
-
-        dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
-            val title = mapFormView.findViewById<EditText>(R.id.etTitle).text.toString()
-            if (title.trim().isEmpty()) {
-                Toast.makeText(this, "Map must have a non-empty title", Toast.LENGTH_LONG).show()
-                return@setOnClickListener
+            context?.let {
+                AlertDialog.Builder(it)
+                    .setTitle("Map title")
+                    .setView(mapFormView)
+                    .setNegativeButton("Cancel", null)
+                    .setPositiveButton("OK", null)
+                    .show()
             }
-            // Navigate to create map activity
-            val intent = Intent(this@MapFragment, CreateMapActivity::class.java)
-            intent.putExtra(EXTRA_MAP_TITLE, title)
-            startActivityForResult(intent, REQUEST_CODE)
-            dialog.dismiss()
+
+        if (dialog != null) {
+            dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
+                val title = mapFormView.findViewById<EditText>(R.id.etTitle).text.toString()
+                if (title.trim().isEmpty()) {
+                    Toast.makeText(context, "Map must have a non-empty title", Toast.LENGTH_LONG).show()
+                    return@setOnClickListener
+                }
+                // Navigate to create map activity
+                val intent = Intent(context, CreateMapActivity::class.java)
+                intent.putExtra(EXTRA_MAP_TITLE, title)
+                startActivityForResult(intent, REQUEST_CODE)
+                dialog.dismiss()
+            }
         }
     }
 
@@ -121,7 +132,7 @@ class MapFragment : Fragment() {
             Log.i(TAG, "onActivityResult with new map title ${userMap.title}")
             userMaps.add(userMap)
             mapAdapter.notifyItemInserted(userMaps.size - 1)
-            serializeUserMaps(this, userMaps)
+            context?.let { serializeUserMaps(it, userMaps) }
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
@@ -151,9 +162,9 @@ class MapFragment : Fragment() {
             UserMap(
                 "test",
                 listOf(
-                    Place("Testing", "Best dorm at Stanford", 37.426, -122.163),
+                    Place("Branner Hall", "Best dorm at Stanford", 37.426, -122.163)
                 )
-            ),
+            )
         )
     }
 }
