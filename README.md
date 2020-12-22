@@ -12,6 +12,17 @@ This app is suitable for people who appreciate the taste of beer. It has the abi
 
 ### Usage
 
+beer_catalog_place
+
+##### Events
+Go to the "Events" section. Here you can watch various events to celebrate and have a beer.
+
+![EventsList](https://github.com/rexxmagtar/beerfornofear/blob/main/blob/usage_event_1.jpg)
+
+Try to create your own events and set the date.
+
+![EventsNewCreate](https://github.com/rexxmagtar/beerfornofear/blob/main/blob/usage_event_2.jpg)
+
 ### Contibuting
 ###### Authors
 Ivan Shishlyannikov — team lead, worked with coroutines, API, design, project navigation, database, notifications, travis.
