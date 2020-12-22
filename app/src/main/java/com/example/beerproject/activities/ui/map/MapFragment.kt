@@ -15,12 +15,12 @@ class MapFragment : Fragment() {
     private lateinit var mapViewModel: MapViewModel
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         mapViewModel =
-                ViewModelProvider(this).get(MapViewModel::class.java)
+            ViewModelProvider(this).get(MapViewModel::class.java)
 
 
         val root = inflater.inflate(R.layout.fragment_map, container, false)
