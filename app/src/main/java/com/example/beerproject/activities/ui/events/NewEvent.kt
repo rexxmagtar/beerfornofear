@@ -35,18 +35,31 @@ class NewEvent : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
     var minute: Int = 0
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-        date_event = "$dayOfMonth.$month.$year "
+        val month_ed = month + 1
+
+        date_event = "$dayOfMonth.$month_ed.$year "
 
         val calendar: Calendar = Calendar.getInstance()
         hour = calendar.get(Calendar.HOUR)
         minute = calendar.get(Calendar.MINUTE)
+
         val timePickerDialog = TimePickerDialog(this@NewEvent, this@NewEvent, hour, minute,
             DateFormat.is24HourFormat(this))
         timePickerDialog.show()
     }
 
     override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
-        date_event += "$hourOfDay:$minute"
+        date_event += if (hourOfDay < 10) {
+            "0$hourOfDay:"
+        } else {
+            "$hourOfDay:"
+        }
+
+        date_event += if (minute < 10) {
+            "0$minute"
+        } else {
+            "$minute"
+        }
     }
 
     private fun initComponents() {
@@ -69,7 +82,7 @@ class NewEvent : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
         btnSetDate!!.setOnClickListener {
             val calendar: Calendar = Calendar.getInstance()
             day = calendar.get(Calendar.DAY_OF_MONTH)
-            month = calendar.get(Calendar.MONTH)
+            month = calendar.get(Calendar.MONTH) + 1
             year = calendar.get(Calendar.YEAR)
 
             val dpd = DatePickerDialog(this@NewEvent, this@NewEvent, year, month, day)

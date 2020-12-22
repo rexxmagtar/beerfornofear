@@ -67,6 +67,7 @@ class DataBase(context: Context?) : SQLiteOpenHelper(context, "beer_catalog.db",
         values.put("name_event", name_event)
         values.put("description", description_event)
         values.put("date", date_event)
+
         return writableDatabase.update(TABLE_EVENT, values, "ID=$id_event", null)
     }
 
