@@ -51,6 +51,14 @@ Long press on beer title removes beer info from favorites list.
 
 <img src="https://github.com/rexxmagtar/beerfornofear/blob/main/blob/Favorite_beer_.png" width="25%" height="50%">
 
+##### Map
+
+Go to the "Map" section. Here you can see Bars of Minsk and there address and working time..
+Works in offline mode.
+On click show all details.
+
+<img src="http://dl3.joxi.net/drive/2020/12/22/0028/0804/1893156/56/348affa8c4.jpg" width="25%" height="50%">
+
 ### Contibuting
 ###### Authors
 Ivan Shishlyannikov — team lead, worked with coroutines, API, design, project navigation, database, notifications, travis.

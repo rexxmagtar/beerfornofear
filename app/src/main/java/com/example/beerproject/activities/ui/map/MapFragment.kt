@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.example.beerproject.R
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -14,18 +13,9 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
-import com.example.beerproject.activities.ui.map.models.UserMap
 import com.example.beerproject.activities.ui.map.models.Place
 
-
-const val EXTRA_USER_MAP = "EXTRA_USER_MAP"
-const val EXTRA_MAP_TITLE = "EXTRA_MAP_TITLE"
-private const val FILENAME = "UserMaps.data"
-private const val REQUEST_CODE = 1234
-private const val TAG = "MainActivity"
-
 class MapFragment : Fragment(), OnMapReadyCallback {
-    private lateinit var mapViewModel: MapViewModel
     private lateinit var mMap: GoogleMap
     private lateinit var userMap: List<Place>
 
@@ -33,18 +23,10 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        mapViewModel =
-            ViewModelProvider(this).get(MapViewModel::class.java)
-
-
         val root = inflater.inflate(R.layout.fragment_map, container, false)
-
-
         val mapFragment = childFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this);
-
-
         return root
     }
 
